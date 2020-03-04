@@ -1,0 +1,26 @@
+{
+  "name":"Vladislav",
+  "age":27,
+  "parameters":
+  {
+    "height":183,
+    "weight":79
+  },
+  "nation":"Ukrainian",
+  "grades":
+  [
+    {
+      "maths":100,
+      "english":60
+    },
+    {
+      "com.sience":90,
+      "history":55
+    },
+    {
+      "russian":100,
+      "ukrainian":100
+    }
+  ],
+  "character":"calm"
+}
