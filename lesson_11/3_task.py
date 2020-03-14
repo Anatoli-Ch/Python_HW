@@ -4,6 +4,8 @@
 #       3.c проверять, что строка является правильной скобочной последовательностью - выводить вердикт
 
 
+
+
 class Brackets:
     def __init__(self):
         self.line = input('Enter a string: ')
@@ -12,23 +14,12 @@ class Brackets:
         return self.line
 
     def check_elements(self):
-        sample = '{', '}', '[', ']', '(', ')', '<', '>'
-        sample1 = '{', '[', '(', '<'
-        sample2 = '}', ']', ')', '>'
-        meetings = 0
-        for element in self.line:
-            for _ in sample:
-                if element in sample:
-                    for elem in self.line:
-                        if elem in sample1:
-                            meetings += 1
-                        elif elem in sample2:
-                            meetings -= 1
-                            if meetings < 0:
-                                return False
-                    return meetings == 0
-                else:
-                    return False
+        while '()' in self.line or '[]' in self.line or '{}' in self.line or '<>' in self.line:
+            self.line = self.line.replace('()', '')
+            self.line = self.line.replace('[]', '')
+            self.line = self.line.replace('{}', '')
+            self.line = self.line.replace('<>', '')
+        return not self.line
 
 
 TEXT = Brackets()
