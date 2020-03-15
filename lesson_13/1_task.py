@@ -1,25 +1,22 @@
 # Написать декоратор и менеджер контекста который будет подавлять все ошибки возникающие в теле вашей функции.
-from functools import partial
+from contextlib import ContextDecorator
 
 
-class Opened:
-    def __init__(self, *args, **kwargs):
-        self.worker = partial(summer, *args, **kwargs)
+class Manager(ContextDecorator):
+    def __init__(self, f):
+        self.f = f
 
     def __enter__(self):
-        print('enter')
-        self.handle = self.worker()
-        return self.handle
+        pass
 
-    def __exit__(self, exc_type, exc_val, exc_tb):  # exc_type = тип исключения exec_val = значение исключени
-        self.handle.close()  # exec_tb = то что привело к этому исключению
-        del self.handle
-        print('exit')
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        return exc_type is not None and issubclass(exc_type, self.f)
 
 
-def summer(f1, f2):
-    return f1 + f2
+@Manager(Exception)
+def function(a,  b):
+    return (a + b) + 'abc'
 
 
-with Opened(summer(10, 15)) as handle:
-    pass
+with Manager(function):
+    print(function(6, 7))
