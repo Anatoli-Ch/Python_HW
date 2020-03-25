@@ -25,5 +25,4 @@ my_class = MyClass()
 my_class.email = "validemail@gmail.com"
 my_class.email = "de@mail@gmail.com."
 my_class.email = "novalidemail"
-# Raised Exception
 print(my_class)
